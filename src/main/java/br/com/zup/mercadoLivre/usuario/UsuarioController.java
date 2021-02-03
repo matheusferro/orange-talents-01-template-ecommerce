@@ -1,7 +1,5 @@
 package br.com.zup.mercadoLivre.usuario;
 
-import br.com.zup.mercadoLivre.security.EncriptaSenha;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +15,6 @@ public class UsuarioController {
 
     @PersistenceContext
     private EntityManager em;
-
-    @Autowired
-    private EncriptaSenha encriptar;
 
     @PostMapping(path = "/usuario")
     @Transactional
