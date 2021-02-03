@@ -1,5 +1,8 @@
 package br.com.zup.mercadoLivre.usuario;
 
+import br.com.zup.mercadoLivre.anotacao.EmailUnico;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import org.hibernate.validator.constraints.Length;
 
@@ -8,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 
 public class UsuarioCadastroRequest {
     @Email
+    @EmailUnico
     @NotNull
     @NotBlank
     private String email;
@@ -17,12 +21,11 @@ public class UsuarioCadastroRequest {
     @Length(min = 6)
     private String senha;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getSenha() {
-        return senha;
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public UsuarioCadastroRequest(@Email @NotBlank @JsonProperty("email") String email,
+                                  @NotBlank @Length(min = 6) @JsonProperty("senha") String senha) {
+        this.email = email;
+        this.senha = senha;
     }
 
     public Usuario toModel() {
