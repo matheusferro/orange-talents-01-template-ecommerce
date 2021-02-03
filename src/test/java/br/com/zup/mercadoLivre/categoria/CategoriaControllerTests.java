@@ -84,7 +84,7 @@ public class CategoriaControllerTests {
 
         cadastroRequest = new CategoriaCadastroRequest("Celulares", 1L);
 
-        Categoria novaCategoriaComMae = cadastroRequest.toModel();
+        Categoria novaCategoriaComMae = cadastroRequest.toModel(repository);
         Mockito.when(repository.save(novaCategoriaComMae)).thenAnswer(i -> i.getArguments()[0]);;
 
         mockMvc.perform(MockMvcRequestBuilders.post("/categoria")
@@ -92,7 +92,7 @@ public class CategoriaControllerTests {
                 .content(jsonMapper.writeValueAsString(cadastroRequest))
         ).andExpect(status().isOk())
                 .andExpect(jsonPath("$.nome").value("Celulares"))
-                .andExpect(jsonPath("$.idCategoriaMae").value(1));
+                .andExpect(jsonPath("$.idCategoriaMae[?(@.id == 1)].nome").value("Informática"));
     }
 
 }

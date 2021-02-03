@@ -14,9 +14,13 @@ public class Categoria {
     @Column(nullable = false, unique = true)
     private String nome;
 
-    private Long idCategoriaMae;
+    @ManyToOne
+    private Categoria idCategoriaMae;
 
-    public Categoria(@NotBlank String nome, Long idCategoriaMae) {
+    @Deprecated
+    public Categoria(){}
+
+    public Categoria(@NotBlank String nome, Categoria idCategoriaMae) {
         this.nome = nome;
         this.idCategoriaMae = idCategoriaMae;
     }
@@ -29,8 +33,7 @@ public class Categoria {
         return nome;
     }
 
-    public Long getIdCategoriaMae() {
+    public Categoria getIdCategoriaMae() {
         return idCategoriaMae;
     }
 }
-
