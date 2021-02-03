@@ -1,6 +1,6 @@
 package br.com.zup.mercadoLivre.usuario;
 
-import br.com.zup.mercadoLivre.anotacao.EmailUnico;
+import br.com.zup.mercadoLivre.anotacao.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 
 public class UsuarioCadastroRequest {
     @Email
-    @EmailUnico
+    @UniqueValue(domainClass = Usuario.class, fieldName = "email")
     @NotNull
     @NotBlank
     private String email;
