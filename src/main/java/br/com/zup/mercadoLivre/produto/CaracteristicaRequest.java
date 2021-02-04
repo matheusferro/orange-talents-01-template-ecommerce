@@ -11,13 +11,15 @@ import java.util.Objects;
 public class CaracteristicaRequest {
 
     @NotBlank
+    @JsonProperty
     private String nome;
 
     @NotBlank
+    @JsonProperty
     private String descricao;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public CaracteristicaRequest(@NotBlank @JsonProperty String nome, @NotBlank @JsonProperty String descricao) {
+    public CaracteristicaRequest(@NotBlank String nome, @NotBlank String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }

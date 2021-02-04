@@ -22,35 +22,41 @@ public class ProdutoCadastroRequest {
 
     @NotNull
     @NotBlank
+    @JsonProperty("nome")
     private String nome;
 
     @NotNull
     @Positive
+    @JsonProperty("valor")
     private BigDecimal valor;
 
     @NotNull
     @Positive
+    @JsonProperty("quantidade")
     private Integer quantidade;
 
     @NotNull
     @Size(min=3)
+    @JsonProperty("caracteristicas")
     private Set<CaracteristicaRequest> caracteristicas = new HashSet<>();
 
     @NotBlank
     @Length(max=1000)
+    @JsonProperty("descricao")
     private String descricao;
 
     @NotNull
     @ExistsValue(domainClass = Categoria.class, fieldName = "id")
+    @JsonProperty("idCategoria")
     private Long idCategoria;
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public ProdutoCadastroRequest(@NotNull @NotBlank @JsonProperty("nome") String nome,
-                                  @NotNull @Positive @JsonProperty("valor") BigDecimal valor,
-                                  @NotNull @Positive @JsonProperty("quantidade") Integer quantidade,
-                                  @NotBlank @Length(max = 1000) @JsonProperty("descricao") String descricao,
-                                  @NotNull @JsonProperty("idCategoria") Long idCategoria,
-                                  @NotNull @Valid @JsonProperty("caracteristicas") Set<CaracteristicaRequest> caracteristicas) {
+    public ProdutoCadastroRequest(@NotNull @NotBlank String nome,
+                                  @NotNull @Positive BigDecimal valor,
+                                  @NotNull @Positive Integer quantidade,
+                                  @NotBlank @Length(max = 1000) String descricao,
+                                  @NotNull Long idCategoria,
+                                  @NotNull @Valid Set<CaracteristicaRequest> caracteristicas) {
         this.nome = nome;
         this.valor = valor;
         this.quantidade = quantidade;

@@ -61,7 +61,7 @@ public class Produto {
 
         notNull(usuario, "Não é possível cadastrar um produto não relacionado com um usuário.");
         notNull(categoria, "É necessário escolher uma categoria.");
-        isTrue(this.caracteristicas.size() <= 3, "É necessário definir no minimo 3 caracteristicas.");
+        isTrue(caracteristicas.size() >= 3, "É necessário definir no minimo 3 caracteristicas.");
 
         this.nome = nome;
         this.valor = valor;
