@@ -14,7 +14,7 @@ public class Categoria {
     @Column(nullable = false, unique = true)
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Categoria idCategoriaMae;
 
     @Deprecated

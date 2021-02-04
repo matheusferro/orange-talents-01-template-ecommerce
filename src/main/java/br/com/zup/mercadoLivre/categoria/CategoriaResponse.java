@@ -6,15 +6,12 @@ public class CategoriaResponse {
 
     private String nome;
 
-    /**
-     * TODO: PARA IMPLEMENTAÇÃO CORRETA DEVE SER MUDADO O TIPO DA VARIAVEL A SEGUIR
-     */
-    private Categoria categoriaMae;
+    private CategoriaMaeResponse categoriaMae;
 
     public CategoriaResponse(Long id, String nome, Categoria categoriaMae) {
         this.id = id;
         this.nome = nome;
-        this.categoriaMae = categoriaMae;
+        this.categoriaMae = new CategoriaMaeResponse(categoriaMae);
     }
 
     public Long getId() {
@@ -25,7 +22,7 @@ public class CategoriaResponse {
         return nome;
     }
 
-    public Categoria getCategoriaMae() {
+    public CategoriaMaeResponse getCategoriaMae() {
         return categoriaMae;
     }
 }
