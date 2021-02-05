@@ -8,7 +8,9 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,12 +46,18 @@ public class Produto {
     private String descricao;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Categoria categoria;
 
     @NotNull
     @ManyToOne
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private Set<Imagem> imagemList = new HashSet<>();
+
+    @Deprecated
+    public Produto(){}
 
     public Produto(@NotBlank String nome,
                    @Positive BigDecimal valor,
@@ -76,6 +84,10 @@ public class Produto {
         this.caracteristicas.addAll(setCaracteristicas);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -98,5 +110,13 @@ public class Produto {
 
     public Categoria getCategoria() {
         return categoria;
+    }
+
+    public void adicionarImagens(Set<String> links) {
+        notNull(links, "Links invalidos.");
+        Set<Imagem> imagens = links.stream().map(link ->
+                new Imagem(link, this)
+                ).collect(Collectors.toSet());
+        this.imagemList.addAll(imagens);
     }
 }
