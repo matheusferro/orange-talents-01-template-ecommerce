@@ -1,5 +1,6 @@
 package br.com.zup.mercadoLivre.produto;
 
+import br.com.zup.mercadoLivre.avaliacao.Avaliacao;
 import br.com.zup.mercadoLivre.categoria.Categoria;
 import br.com.zup.mercadoLivre.usuario.Usuario;
 import org.hibernate.validator.constraints.Length;
@@ -8,9 +9,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,6 +54,9 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private Set<Imagem> imagemList = new HashSet<>();
+
+    @OneToMany(mappedBy = "produto")
+    private Set<Avaliacao> avaliacao = new HashSet<>();
 
     @Deprecated
     public Produto(){}
@@ -110,6 +112,10 @@ public class Produto {
 
     public Categoria getCategoria() {
         return categoria;
+    }
+
+    public Long getIdUsuario() {
+        return usuario.getId();
     }
 
     public void adicionarImagens(Set<String> links) {
