@@ -4,9 +4,9 @@ import br.com.zup.mercadoLivre.security.TokenService;
 import br.com.zup.mercadoLivre.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
@@ -26,15 +26,14 @@ public class ProdutoController {
     @PostMapping("/produto")
     @Transactional
     public ResponseEntity<ProdutoCriadoResponse> cadastro(@RequestBody @Valid ProdutoCadastroRequest produtoRequest,
-                                        @RequestHeader("Authorization") String token){
+                                                          @AuthenticationPrincipal Usuario usuarioLogado){
         /**
+         *  String emailDoUsuarioLogado = SecurityContextHolder.getContext().getAuthentication().getName();
          * Usuario simulado:
          * Usuario usuario = usuarioRepository.findByEmail("email@teste.com").get();
          */
-        Long id = tokenService.getIdUsuarioLogado(token);
 
-        Usuario usuario = entityManager.find(Usuario.class, id);
-        Produto produto = produtoRequest.toModel(entityManager, usuario);
+        Produto produto = produtoRequest.toModel(entityManager, usuarioLogado);
         entityManager.persist(produto);
 
         return ResponseEntity.ok().body(new ProdutoCriadoResponse(produto, entityManager));

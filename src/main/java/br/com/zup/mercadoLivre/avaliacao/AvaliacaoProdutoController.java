@@ -6,6 +6,7 @@ import br.com.zup.mercadoLivre.security.TokenService;
 import br.com.zup.mercadoLivre.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -26,18 +27,16 @@ public class AvaliacaoProdutoController {
     @Transactional
     public ResponseEntity<?> avaliar(@RequestBody @Valid ProdutoAvaliacaoRequest avaliacaoRequest,
                                      @PathVariable("id") Long idProduto,
-                                     @RequestHeader("Authorization") String token){
+                                     @AuthenticationPrincipal Usuario usuarioLogado){
 
-        Long idUsuario = tokenService.getIdUsuarioLogado(token);
-        Usuario usuario = entityManager.find(Usuario.class, idUsuario);
         Produto produto = entityManager.find(Produto.class, idProduto);
 
         //Realizar testes automatizados (é uma condicional/branch)
-        if(produto == null || produto.getIdUsuario() == idUsuario){
+        if(produto == null || produto.getIdUsuario() == usuarioLogado.getId()){
             return ResponseEntity.badRequest().body("Escolha um produto valido e que não te pertence.");
         }
 
-        Avaliacao avaliacao = avaliacaoRequest.toModel(produto, usuario);
+        Avaliacao avaliacao = avaliacaoRequest.toModel(produto, usuarioLogado);
 
         entityManager.persist(avaliacao);
         return ResponseEntity.ok().body(avaliacaoRequest.toString());

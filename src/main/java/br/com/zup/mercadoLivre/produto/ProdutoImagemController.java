@@ -2,9 +2,12 @@ package br.com.zup.mercadoLivre.produto;
 
 import br.com.zup.mercadoLivre.security.TokenService;
 import br.com.zup.mercadoLivre.upload.Uploader;
+import br.com.zup.mercadoLivre.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -32,10 +35,9 @@ public class ProdutoImagemController {
     @Transactional
     public ResponseEntity<?> cadastroImagem(@Valid ImagemCadastroRequest requestImg,
                                             @PathVariable("id") Long idProduto,
-                                            @RequestHeader("Authorization") String token) {
-        Long idLogado = tokenService.getIdUsuarioLogado(token);
+                                            @AuthenticationPrincipal Usuario usuarioLogado) {
 
-        Produto produtoDoUsuario = produtoRepository.findByIdAndUsuarioId(idProduto,idLogado);
+        Produto produtoDoUsuario = produtoRepository.findByIdAndUsuarioId(idProduto, usuarioLogado.getId());
         if(produtoDoUsuario == null){
             return ResponseEntity.badRequest().build();
         }

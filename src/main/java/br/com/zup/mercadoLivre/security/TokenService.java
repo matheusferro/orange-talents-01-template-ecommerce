@@ -49,14 +49,4 @@ public class TokenService {
         Claims claims = Jwts.parser().setSigningKey(this.secretKey).parseClaimsJws(token).getBody();
         return Long.parseLong(claims.getSubject());
     }
-
-    public Long getIdUsuarioLogado(String token){
-        if(token == null || token.isEmpty() || !token.startsWith("Bearer ")){
-            return null;
-        }
-        token = token.substring(7, token.length());
-        Claims claims = Jwts.parser().setSigningKey(this.secretKey).parseClaimsJws(token).getBody();
-        return Long.parseLong(claims.getSubject());
-    }
-
 }
