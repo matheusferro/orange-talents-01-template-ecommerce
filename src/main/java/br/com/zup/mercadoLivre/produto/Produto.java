@@ -2,6 +2,7 @@ package br.com.zup.mercadoLivre.produto;
 
 import br.com.zup.mercadoLivre.avaliacao.Avaliacao;
 import br.com.zup.mercadoLivre.categoria.Categoria;
+import br.com.zup.mercadoLivre.pergunta.Pergunta;
 import br.com.zup.mercadoLivre.usuario.Usuario;
 import org.hibernate.validator.constraints.Length;
 
@@ -57,6 +58,9 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto")
     private Set<Avaliacao> avaliacao = new HashSet<>();
+
+    @OneToMany(mappedBy = "produto")
+    private Set<Pergunta> perguntas = new HashSet<>();
 
     @Deprecated
     public Produto(){}
@@ -114,8 +118,8 @@ public class Produto {
         return categoria;
     }
 
-    public Long getIdUsuario() {
-        return usuario.getId();
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public void adicionarImagens(Set<String> links) {
@@ -124,5 +128,10 @@ public class Produto {
                 new Imagem(link, this)
                 ).collect(Collectors.toSet());
         this.imagemList.addAll(imagens);
+    }
+
+    public boolean produtoPertenceUsuario(Usuario usuario){
+        notNull(usuario, "Usuario invalido.");
+        return this.usuario.getId() == usuario.getId();
     }
 }

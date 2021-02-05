@@ -1,5 +1,6 @@
 package br.com.zup.mercadoLivre.usuario;
 
+import br.com.zup.mercadoLivre.pergunta.Pergunta;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
@@ -13,7 +14,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 @Entity
@@ -36,6 +39,9 @@ public class Usuario implements UserDetails {
     @NotNull
     @CreationTimestamp
     private LocalDateTime dataCriacao;
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<Pergunta> perguntas = new HashSet<>();
 
     @Deprecated
     public Usuario(){}
@@ -66,6 +72,10 @@ public class Usuario implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override

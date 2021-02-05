@@ -32,7 +32,7 @@ public class AvaliacaoProdutoController {
         Produto produto = entityManager.find(Produto.class, idProduto);
 
         //Realizar testes automatizados (é uma condicional/branch)
-        if(produto == null || produto.getIdUsuario() == usuarioLogado.getId()){
+        if(produto == null || produto.produtoPertenceUsuario(usuarioLogado)){
             return ResponseEntity.badRequest().body("Escolha um produto valido e que não te pertence.");
         }
 
