@@ -2,6 +2,7 @@ package br.com.zup.mercadoLivre.produto;
 
 import br.com.zup.mercadoLivre.categoria.Categoria;
 import br.com.zup.mercadoLivre.categoria.CategoriaResponse;
+import br.com.zup.mercadoLivre.produto.caracteristica.CaracteristicaResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.EntityManager;

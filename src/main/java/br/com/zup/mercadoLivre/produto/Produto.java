@@ -3,6 +3,9 @@ package br.com.zup.mercadoLivre.produto;
 import br.com.zup.mercadoLivre.avaliacao.Avaliacao;
 import br.com.zup.mercadoLivre.categoria.Categoria;
 import br.com.zup.mercadoLivre.pergunta.Pergunta;
+import br.com.zup.mercadoLivre.produto.caracteristica.Caracteristica;
+import br.com.zup.mercadoLivre.produto.caracteristica.CaracteristicaRequest;
+import br.com.zup.mercadoLivre.produto.imagem.Imagem;
 import br.com.zup.mercadoLivre.usuario.Usuario;
 import org.hibernate.validator.constraints.Length;
 
@@ -37,7 +40,7 @@ public class Produto {
     private Integer quantidade;
 
     @Size(min=3)
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Caracteristica> caracteristicas = new HashSet<>();
 
     @NotBlank
@@ -53,13 +56,13 @@ public class Produto {
     @ManyToOne
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Imagem> imagemList = new HashSet<>();
 
-    @OneToMany(mappedBy = "produto")
+    @OneToMany(mappedBy = "produto", fetch = FetchType.EAGER)
     private Set<Avaliacao> avaliacao = new HashSet<>();
 
-    @OneToMany(mappedBy = "produto")
+    @OneToMany(mappedBy = "produto", fetch = FetchType.EAGER)
     private Set<Pergunta> perguntas = new HashSet<>();
 
     @Deprecated
@@ -120,6 +123,18 @@ public class Produto {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public Set<Imagem> getImagemList() {
+        return imagemList;
+    }
+
+    public Set<Avaliacao> getAvaliacao() {
+        return avaliacao;
+    }
+
+    public Set<Pergunta> getPerguntas() {
+        return perguntas;
     }
 
     public void adicionarImagens(Set<String> links) {

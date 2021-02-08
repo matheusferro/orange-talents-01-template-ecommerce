@@ -1,5 +1,6 @@
-package br.com.zup.mercadoLivre.produto;
+package br.com.zup.mercadoLivre.produto.caracteristica;
 
+import br.com.zup.mercadoLivre.produto.Produto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

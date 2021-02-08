@@ -1,5 +1,6 @@
-package br.com.zup.mercadoLivre.produto;
+package br.com.zup.mercadoLivre.produto.imagem;
 
+import br.com.zup.mercadoLivre.produto.Produto;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
@@ -27,5 +28,9 @@ public class Imagem {
     public Imagem(@NotNull String link, Produto produto) {
         this.link = link;
         this.produto = produto;
+    }
+
+    public String getLink() {
+        return link;
     }
 }

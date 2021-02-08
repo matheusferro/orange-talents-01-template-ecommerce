@@ -53,4 +53,24 @@ public class Avaliacao {
         this.produto = produto;
         this.usuario = usuario;
     }
+
+    public Integer getNota() {
+        return nota;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
 }

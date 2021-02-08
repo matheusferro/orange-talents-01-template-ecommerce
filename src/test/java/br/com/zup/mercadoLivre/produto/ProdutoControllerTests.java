@@ -1,14 +1,11 @@
 package br.com.zup.mercadoLivre.produto;
 
 import br.com.zup.mercadoLivre.categoria.Categoria;
-import br.com.zup.mercadoLivre.categoria.CategoriaCadastroRequest;
-import br.com.zup.mercadoLivre.categoria.CategoriaRepository;
+import br.com.zup.mercadoLivre.produto.caracteristica.CaracteristicaRequest;
 import br.com.zup.mercadoLivre.usuario.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.Arguments;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.Set;
 

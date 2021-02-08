@@ -1,5 +1,7 @@
-package br.com.zup.mercadoLivre.produto;
+package br.com.zup.mercadoLivre.produto.imagem;
 
+import br.com.zup.mercadoLivre.produto.Produto;
+import br.com.zup.mercadoLivre.produto.ProdutoRepository;
 import br.com.zup.mercadoLivre.security.TokenService;
 import br.com.zup.mercadoLivre.upload.Uploader;
 import br.com.zup.mercadoLivre.usuario.Usuario;
@@ -41,7 +43,7 @@ public class ProdutoImagemController {
         produtoDoUsuario.adicionarImagens(links);
         produtoRepository.save(produtoDoUsuario);
 
-        return ResponseEntity.ok().body(new ImagemResponse(produtoDoUsuario, links));
+        return ResponseEntity.ok().body(new ImagemResponse(produtoDoUsuario));
     }
     /**
      * MultipartFile img = requestImg.getImagens().iterator().next();

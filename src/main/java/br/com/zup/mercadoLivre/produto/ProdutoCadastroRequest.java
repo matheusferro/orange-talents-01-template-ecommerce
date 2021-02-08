@@ -2,6 +2,7 @@ package br.com.zup.mercadoLivre.produto;
 
 import br.com.zup.mercadoLivre.anotacao.ExistsValue;
 import br.com.zup.mercadoLivre.categoria.Categoria;
+import br.com.zup.mercadoLivre.produto.caracteristica.CaracteristicaRequest;
 import br.com.zup.mercadoLivre.usuario.Usuario;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

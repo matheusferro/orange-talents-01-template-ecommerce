@@ -1,4 +1,4 @@
-package br.com.zup.mercadoLivre.produto;
+package br.com.zup.mercadoLivre.produto.caracteristica;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

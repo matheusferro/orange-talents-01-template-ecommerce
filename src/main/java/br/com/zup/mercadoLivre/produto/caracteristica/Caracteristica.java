@@ -1,4 +1,6 @@
-package br.com.zup.mercadoLivre.produto;
+package br.com.zup.mercadoLivre.produto.caracteristica;
+
+import br.com.zup.mercadoLivre.produto.Produto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
