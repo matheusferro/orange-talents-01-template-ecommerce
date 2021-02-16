@@ -39,6 +39,6 @@ public class AvaliacaoProdutoController {
         Avaliacao avaliacao = avaliacaoRequest.toModel(produto, usuarioLogado);
 
         entityManager.persist(avaliacao);
-        return ResponseEntity.ok().body(avaliacaoRequest.toString());
+        return ResponseEntity.ok().body(new AvaliacaoResponse(avaliacao));
     }
 }

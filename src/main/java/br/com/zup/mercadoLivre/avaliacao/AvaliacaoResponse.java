@@ -1,15 +1,22 @@
 package br.com.zup.mercadoLivre.avaliacao;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AvaliacaoResponse {
 
+    @JsonProperty
     private Integer nota;
 
+    @JsonProperty
     private String titulo;
 
+    @JsonProperty
     private String descricao;
 
+    @JsonProperty
     private String nomeProduto;
 
+    @JsonProperty
     private String usuario;
 
     public AvaliacaoResponse(Avaliacao avaliacao){
