@@ -21,6 +21,10 @@ public class DetalhesProdutoController {
     public ResponseEntity<DetalhesProduto> detalhesProduto(@PathVariable("id") Long id){
 
         Optional<Produto> produto = produtoRepository.findById(id);
+        if(produto.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
         DetalhesProduto detalhes = new DetalhesProduto(produto);
         return ResponseEntity.ok().body(detalhes);
     }
