@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.zup</groupId>
-	<artifactId>mercadoLivre</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>ecommerce</artifactId>
+	<version>1</version>
 	<name>mercadoLivre</name>
 	<description>Projeto - Mercado Livre</description>
 	<properties>
