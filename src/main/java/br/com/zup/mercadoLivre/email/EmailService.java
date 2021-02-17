@@ -1,5 +1,6 @@
 package br.com.zup.mercadoLivre.email;
 
+import br.com.zup.mercadoLivre.compra.Compra;
 import br.com.zup.mercadoLivre.pergunta.Pergunta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,5 +13,13 @@ public class EmailService {
 
     public void novaPergunta(Pergunta pergunta){
         email.enviarEmail(pergunta.getUsuario().getEmail(), "email@empresa.com", pergunta.getEmailDono(), "Nova mensagem", pergunta.getTitulo());
+    }
+
+    public void compraRealizada(Compra compra) {
+        email.enviarEmail(compra.getUsuario().getEmail(),
+                "email@empresa.com",
+                compra.getProduto().getUsuario().getEmail(),
+                "Compra realizada",
+                "compra");
     }
 }

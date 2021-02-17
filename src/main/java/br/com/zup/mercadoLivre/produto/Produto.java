@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.hibernate.validator.internal.util.Contracts.assertTrue;
 import static org.springframework.util.Assert.isTrue;
 import static org.springframework.util.Assert.notNull;
 
@@ -148,5 +149,15 @@ public class Produto {
     public boolean produtoPertenceUsuario(Usuario usuario){
         notNull(usuario, "Usuario invalido.");
         return this.usuario.getId() == usuario.getId();
+    }
+
+    public boolean abaterQuantidade(int quantidadeComprada){
+        notNull(quantidadeComprada, "Não é possível abater esse valor.");
+        assertTrue(quantidadeComprada>0, "Quantidade deve ser positiva.");
+        if(quantidadeComprada <= this.quantidade){
+            this.quantidade -= quantidadeComprada;
+            return true;
+        }
+        return false;
     }
 }
