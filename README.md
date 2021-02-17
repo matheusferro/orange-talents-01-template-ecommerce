@@ -1,4 +1,4 @@
-# Casa do código - API
+# E-commerce - API
 
 ## Descrição
 API construida para simular um e-commerce. Com as funcionalidades de criar categorias, produtos, perguntas, avaliações e realizar compra.
