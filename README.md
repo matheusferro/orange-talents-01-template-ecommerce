@@ -5,7 +5,7 @@ API construida para simular um e-commerce. Com as funcionalidades de criar categ
 
 ## Setup
 ```
-> git clone https://github.com/matheusferro/orange-talents-01-template-casa-do-codigo.git
+> git clone https://github.com/matheusferro/orange-talents-01-template-ecommerce.git
 > mvn dependency:resolve dependency:resolve-plugins
 > mvn clean package
 > java -jar .\target\ecommerce-1.jar
