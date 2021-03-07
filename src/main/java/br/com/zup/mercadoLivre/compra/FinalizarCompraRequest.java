@@ -12,7 +12,7 @@ public class FinalizarCompraRequest {
 
     @NotNull
     @Positive
-    private int quantidade;
+    private Integer quantidade;
 
     @NotNull
     @Positive
@@ -21,7 +21,7 @@ public class FinalizarCompraRequest {
     @NotNull
     private GetwayPagamento getway;
 
-    public int getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 

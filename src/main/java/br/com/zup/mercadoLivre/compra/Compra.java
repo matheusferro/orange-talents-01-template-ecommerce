@@ -6,8 +6,11 @@ import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
+
+import static io.jsonwebtoken.lang.Assert.isTrue;
+import static org.springframework.util.Assert.notNull;
 
 @Entity
 public class Compra {
@@ -28,9 +31,9 @@ public class Compra {
     @ManyToOne
     private Usuario usuario;
 
+    @Min(1)
     @NotNull
-    @Positive
-    private int quantidade;
+    private Integer quantidade;
 
     @Enumerated
     @NotNull
@@ -39,7 +42,14 @@ public class Compra {
     @Deprecated
     Compra(){}
 
-    public Compra(Produto produto, Usuario usuario, int quantidade, GetwayPagamento getwayPagamento) {
+    public Compra(@NotNull Produto produto,
+                  @NotNull Usuario usuario,
+                  @NotNull @Min(1) Integer quantidade,
+                  GetwayPagamento getwayPagamento) {
+        notNull(produto, "Necessário um produto para cadastrar compra.");
+        notNull(usuario, "Necessário relacionar compra om um usuario.");
+        isTrue(quantidade > 0, "Quantidade comprada precisa ser maior que 0");
+
         this.produto = produto;
         this.usuario = usuario;
         this.quantidade = quantidade;

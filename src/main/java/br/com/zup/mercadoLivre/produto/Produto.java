@@ -36,7 +36,6 @@ public class Produto {
     @Column(nullable = false)
     private BigDecimal valor;
 
-    @Positive
     @Column(nullable = false)
     private Integer quantidade;
 
@@ -71,7 +70,7 @@ public class Produto {
 
     public Produto(@NotBlank String nome,
                    @Positive BigDecimal valor,
-                   @Positive Integer quantidade,
+                   @Min(1) Integer quantidade,
                    @NotBlank @Length(max = 1000) String descricao,
                    @NotNull @Valid Categoria categoria,
                    @NotNull @Valid Usuario usuario,
@@ -80,6 +79,8 @@ public class Produto {
         notNull(usuario, "Não é possível cadastrar um produto não relacionado com um usuário.");
         notNull(categoria, "É necessário escolher uma categoria.");
         isTrue(caracteristicas.size() >= 3, "É necessário definir no minimo 3 caracteristicas.");
+        notNull(quantidade, "É necessário definir uma quantidade.");
+        isTrue(quantidade > 0, "Quantidade inválida.");
 
         this.nome = nome;
         this.valor = valor;
